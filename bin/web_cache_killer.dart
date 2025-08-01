@@ -108,9 +108,9 @@ void _showHelp(ArgParser parser) {
   print(
       '  web_cache_killer --no-zip           # Build to build/web/ only (no zip)');
   print(
-      '  web_cache_killer --name app         # Build to build/app/ and create app.zip');
+      '  web_cache_killer --name release         # Build to build/release/ and create release.zip');
   print(
-      '  web_cache_killer --name hello --auto-upload  # Build to build/hello/ and upload hello.zip');
+      '  web_cache_killer --name release --auto-upload  # Build to build/release/ and upload release.zip');
   print('  web_cache_killer --verbose          # Show detailed output');
   print('  web_cache_killer --no-clean         # Skip flutter clean step');
   print('');

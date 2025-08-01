@@ -21,8 +21,8 @@ cd my_flutter_project
 # Build and create web.zip
 web_cache_killer
 
-# Build with custom name (creates hello.zip)
-web_cache_killer --name hello
+# Build with custom name (creates beta.zip)
+web_cache_killer --name beta
 
 # Build and upload automatically
 web_cache_killer --auto-upload
@@ -49,7 +49,7 @@ All HTML files are automatically updated to use the new names.
 | Command | What It Does |
 |---------|-------------|
 | `web_cache_killer` | Build and create `web.zip` |
-| `web_cache_killer --name app` | Build and create `app.zip` |
+| `web_cache_killer --name release` | Build and create `release.zip` |
 | `web_cache_killer --auto-upload` | Build and upload to tmpfiles.org |
 | `web_cache_killer --no-zip` | Build only (no zip file) |
 | `web_cache_killer --verbose` | Show detailed output |
@@ -91,8 +91,8 @@ build/
 **Custom name build:**
 ```
 build/
-├── hello/         # Your app files
-└── hello.zip      # Ready to deploy
+├── release/         # Your app files
+└── release.zip      # Ready to deploy
 ```
 
 ## Upload Feature

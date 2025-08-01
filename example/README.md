@@ -2,47 +2,37 @@
 
 You can also find more general documentation in the main [README.md](../README.md).
 
-## Installation
-
+## Install
 ```bash
-# Install globally
 dart pub global activate web_cache_killer
 ```
 
-## Quick Start
-
+## Basic Commands
 ```bash
-# Basic build
-web_cache_killer
+web_cache_killer                    # Creates web.zip
+web_cache_killer --name release     # Creates release.zip  
+web_cache_killer --auto-upload      # Build and upload
+web_cache_killer --no-zip           # Build folder only
+```
 
-# Custom name
-web_cache_killer --name app
-
-# Auto upload
+## Common Use Cases
+```bash
+# Quick deploy
 web_cache_killer --auto-upload
 
-# Build only (no zip)
-web_cache_killer --no-zip
-
-# Custom name with upload
-web_cache_killer --name app --auto-upload
-
-# Verbose output
-web_cache_killer --verbose
-
-# Skip clean step
+# Development (faster)
 web_cache_killer --no-clean
 
-# Development mode (fast build with details)
-web_cache_killer --no-clean --verbose
-
-# Custom name build only
-web_cache_killer --name app --no-zip
-
 # Production build
-web_cache_killer --name production
+web_cache_killer --name prod --auto-upload
 
-# Help and version
-web_cache_killer --help
-web_cache_killer --version
+# See details
+web_cache_killer --verbose
 ```
+
+## Options
+- `--name release` → Creates `release.zip`
+- `--auto-upload` → Uploads and gives download link
+- `--no-zip` → Creates folder only (no zip)
+- `--no-clean` → Faster build (skips cleanup)
+- `--verbose` → Shows detailed output
