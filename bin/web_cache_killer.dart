@@ -119,7 +119,7 @@ void _showHelp(ArgParser parser) {
 }
 
 void _showVersion() {
-  print('Web Cache Killer v1.0.0');
+  print('Web Cache Killer v0.0.2');
   print(
       'A CLI tool for building and deploying Flutter web apps with cache busting.');
 }
