@@ -1,6 +1,6 @@
 name: web_cache_killer
 description: "A Flutter package that solves Flutter web cache problems by automatically renaming JavaScript files with timestamps during build process."
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/kyawthet-naing/web-cache-killer.git
 repository: https://github.com/kyawthet-naing/web-cache-killer
 issue_tracker: https://github.com/kyawthet-naing/web-cache-killer/issues

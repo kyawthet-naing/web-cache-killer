@@ -25,7 +25,7 @@ class Builder {
         _uploadService = UploadService(config),
         _fileUtils = FileUtils();
 
-  /// Main deployment process
+   /// Main deployment process
   Future<bool> deploy() async {
     try {
       _logger.printHeader('Web Cache Killer');
@@ -40,15 +40,18 @@ class Builder {
         return false;
       }
 
+      // Directory renaming BEFORE cache busting
+      if (config.webDir != 'web') {
+        if (config.verbose) {
+          _logger.printStep('📁 Renaming web directory...');
+        }
+        await _renameWebDirectory();
+      }
+
       // Cache busting
       final timestamp = _generateTimestamp();
       if (!await _cacheBuster.applyTimestampToFiles(timestamp)) {
         return false;
-      }
-
-      // Directory renaming if needed
-      if (config.webDir != 'web') {
-        await _renameWebDirectory();
       }
 
       // Package (if not skipped)
@@ -72,7 +75,6 @@ class Builder {
       return false;
     }
   }
-
   /// Build process
   Future<bool> _buildProcess() async {
     // Clean
@@ -82,7 +84,7 @@ class Builder {
 
     // Dependencies
     if (!await _buildService.getDependencies()) return false;
-    
+
     // Build
     if (!await _buildService.buildWeb()) return false;
 
@@ -145,7 +147,8 @@ class Builder {
       await _createZipFile(sourceDir, zipPath);
 
       final size = await _fileUtils.getFileSize(zipPath);
-      _logger.printSuccess('Successfully created ${config.zipName} (Size: $size)');
+      _logger
+          .printSuccess('Successfully created ${config.zipName} (Size: $size)');
 
       return true;
     } catch (e) {
@@ -205,12 +208,14 @@ class Builder {
         print('✅ Uploaded successfully');
         break;
       case 'skipped_no_upload':
-        final buildPath = path.join(Directory.current.path, config.buildDir, config.webDir);
+        final buildPath =
+            path.join(Directory.current.path, config.buildDir, config.webDir);
         print('📁 Build: $buildPath');
         break;
       case 'failed':
         print('❌ Upload failed');
-        final zipPath = path.join(Directory.current.path, config.buildDir, config.zipName);
+        final zipPath =
+            path.join(Directory.current.path, config.buildDir, config.zipName);
         print('📁 Local: $zipPath');
         break;
     }

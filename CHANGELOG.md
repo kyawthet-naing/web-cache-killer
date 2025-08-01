@@ -1,50 +1,39 @@
 # Changelog
 
+## 0.0.3 - 2025-08-01
+
+### What's Fixed
+- **Custom names now work!** - Fixed `--name hello` creating proper folders and zip files
+- **Better error messages** - Shows clear info when something goes wrong
+- **Cleaner output** - Less clutter, more helpful messages
+
+### What Changed
+- Custom builds like `--name app` now create `build/app/` and `app.zip` correctly
+- Added progress indicators so you know what's happening
+- Fixed internal build process order
+
 ## 0.0.2 - 2025-01-08
 
-### Fixed
-- **BREAKING FIX**: Removed Flutter SDK dependencies to enable global activation
-- Fixed "requires the Flutter SDK, which is unsupported for global executables" error
-- Replaced `flutter_test` with pure Dart `test` package
-- Replaced `flutter_lints` with pure Dart `lints` package
-- Updated analysis_options.yaml to use Dart lints instead of Flutter lints
+### What's Fixed
+- **Made it work globally** - Can now install with `dart pub global activate`
+- Fixed "Flutter SDK required" error
+- Works on all computers (Windows, Mac, Linux)
 
-### Changed
-- Package is now a pure Dart CLI tool (no Flutter SDK required)
-- Can be globally activated with `dart pub global activate web_cache_killer`
-- Works on all platforms (Windows, macOS, Linux) without Flutter SDK dependency issues
+### What Changed
+- Now a pure Dart tool (no Flutter SDK dependency issues)
+- Easier to install and use
 
-### Migration
-- No code changes needed for users
-- Simply reactivate globally: `dart pub global activate web_cache_killer`
+## 0.0.1 - 2025-01-01
 
-## 0.0.1 - Initial Release
+### First Release
+- Fixes Flutter web cache problems
+- Renames JavaScript files with timestamps
+- Creates zip files ready to deploy
+- Upload feature to get instant download links
 
-### Initial Release
-
-Solves Flutter web cache problems by automatically renaming JavaScript files with timestamps.
-
-#### Features
-- **Automatic cache busting** - Renames JS files with timestamps
-- **Cross-platform** - Works on Windows, macOS, Linux
-- **Simple commands** - Easy CLI interface
-- **Custom naming** - `--name app` creates build/app/ and app.zip
-- **Auto upload** - `--auto-upload` uploads to tmpfiles.org
-- **Build only** - `--no-zip` skips zip creation
-- **Zero dependencies** - Uses built-in Dart archive package
-
-#### Commands
+### Commands
 ```bash
-web_cache_killer                    # Build and create zip
-web_cache_killer --name app         # Custom name
-web_cache_killer --auto-upload      # Build and upload
-web_cache_killer --no-zip           # Build only
-web_cache_killer --verbose          # Detailed output
+web_cache_killer                 # Build and create web.zip
+web_cache_killer --name app      # Build and create app.zip
+web_cache_killer --auto-upload   # Build and upload automatically
 ```
-
-#### Cache Busting
-- `flutter.js` → `flutter_20241201_143022_456.js`
-- `main.dart.js` → `main_20241201_143022_456.dart.js`
-- Updates all HTML references automatically
-
-Ensures users always get the latest version without manual cache clearing.

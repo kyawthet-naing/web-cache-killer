@@ -1,22 +1,10 @@
 # Web Cache Killer
 
-A Flutter package that solves Flutter web cache problems by automatically renaming JavaScript files with timestamps during build process.
+Fixes Flutter web cache problems by automatically renaming JavaScript files with timestamps.
 
-## The Problem
+## Why You Need This
 
-Flutter web apps often face caching issues where users see old versions of your app even after deployment. Browsers cache JavaScript files aggressively, causing users to see outdated content until they manually clear their cache.
-
-## The Solution
-
-Web Cache Killer automatically renames your Flutter web JavaScript files with unique timestamps and updates all references, ensuring users always get the latest version of your app without manual cache clearing.
-
-## Features
-
-- 🔧 **Cross-platform** - Works on Windows, macOS, and Linux
-- 📦 **Zero dependencies** - Uses built-in Dart archive package
-- 🕒 **Cache busting** - Automatic timestamp-based cache busting
-- 🚀 **Simple commands** - Easy to use CLI tool
-- 📤 **Optional upload** - Upload to [tmpfiles.org](https://tmpfiles.org/) and get direct download link `http://tmpfiles.org/dl/123456/web.zip`
+When you deploy a Flutter web app, users often see the old version because browsers cache JavaScript files. This tool fixes that by renaming your JS files with timestamps so users always get the latest version.
 
 ## Installation
 
@@ -24,66 +12,50 @@ Web Cache Killer automatically renames your Flutter web JavaScript files with un
 dart pub global activate web_cache_killer
 ```
 
-## Usage
-
-### Basic Commands
+## Quick Start
 
 ```bash
-# Build and create zip
+# Go to your Flutter project folder
+cd my_flutter_project
+
+# Build and create web.zip
 web_cache_killer
 
-# Custom name (creates build/app/ and app.zip)
-web_cache_killer --name app
+# Build with custom name (creates hello.zip)
+web_cache_killer --name hello
 
-# Auto upload
+# Build and upload automatically
 web_cache_killer --auto-upload
-
-# Build only (no zip)
-web_cache_killer --no-zip
 ```
 
-### Options
-
-```bash
-# Verbose output
-web_cache_killer --verbose
-
-# Skip clean step (faster)
-web_cache_killer --no-clean
-
-# Combined options
-web_cache_killer --name myapp --auto-upload --verbose
-```
-
-## How It Works
-
-Automatically renames JavaScript files with timestamps for cache busting:
+## What It Does
 
 **Before:**
 ```
-flutter.js → flutter_20241201_143022_456.js
-main.dart.js → main_20241201_143022_456.dart.js
+flutter.js
+main.dart.js
 ```
 
-All references in HTML files are automatically updated.
-
-## File Structure
-
-**Default:**
+**After:**
 ```
-build/
-├── web/           # Built files
-└── web.zip        # Package
+flutter_20250801_143022_456.js
+main_20250801_143022_456.dart.js
 ```
 
-**Custom name:**
-```
-build/
-├── app/           # Built files  
-└── app.zip        # Package
-```
+All HTML files are automatically updated to use the new names.
 
-## Expected Output
+## Commands
+
+| Command | What It Does |
+|---------|-------------|
+| `web_cache_killer` | Build and create `web.zip` |
+| `web_cache_killer --name app` | Build and create `app.zip` |
+| `web_cache_killer --auto-upload` | Build and upload to tmpfiles.org |
+| `web_cache_killer --no-zip` | Build only (no zip file) |
+| `web_cache_killer --verbose` | Show detailed output |
+| `web_cache_killer --no-clean` | Skip flutter clean (faster) |
+
+## Output Example
 
 ```
 🚀 Web Cache Killer
@@ -92,22 +64,71 @@ Checking requirements...
 ✅ Requirements satisfied
 🧹 Cleaning...
 ✅ Cleaned
+📦 Getting dependencies...
+✅ Dependencies ready
 🔧 Building web...
 ✅ Build completed
 🕒 Applying cache busting...
 ✅ Cache busting applied (3 files)
 📦 Creating deployment package...
-✅ Successfully created web.zip (Size: 7.9 MB)
+✅ Successfully created web.zip (Size: 7.9M)
 
 ==================================
-✅ 🎉 Build Completed!
-
+🎉 Build Completed!
 ✅ Created: web.zip
-📁 Local: /path/to/project/build/web.zip
+📁 Build: /path/to/project/build/web
 ```
 
-## Troubleshooting
+## File Structure
 
-- **"pubspec.yaml not found"** - Run from Flutter project root
-- **"Flutter not found"** - Install Flutter SDK and add to PATH
-- **Upload fails** - Check internet connection, zip still available locally
+**Default build:**
+```
+build/
+├── web/           # Your app files
+└── web.zip        # Ready to deploy
+```
+
+**Custom name build:**
+```
+build/
+├── hello/         # Your app files
+└── hello.zip      # Ready to deploy
+```
+
+## Upload Feature
+
+Upload your zip automatically to get a direct download link:
+
+```bash
+web_cache_killer --auto-upload
+```
+
+You'll get a link like: `http://tmpfiles.org/dl/123456/web.zip`
+
+## Common Issues
+
+**❌ "pubspec.yaml not found"**
+- Make sure you're in your Flutter project folder
+
+**❌ "Flutter not found"**
+- Install Flutter: https://flutter.dev/docs/get-started/install
+- Make sure `flutter` command works in your terminal
+
+**❌ Upload fails**
+- Check your internet connection
+- Your zip file is still saved locally in the `build/` folder
+
+## Requirements
+
+- Flutter SDK installed
+- Dart 2.12+ 
+- Run from Flutter project root (where `pubspec.yaml` is)
+
+## Features
+
+✅ **Cross-platform** - Windows, macOS, Linux  
+✅ **Zero setup** - Just install and run  
+✅ **Cache busting** - Automatic timestamp renaming  
+✅ **Custom names** - Name your builds  
+✅ **Auto upload** - Get instant download links  
+✅ **Fast builds** - Skip clean with `--no-clean`
